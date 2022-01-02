@@ -94,6 +94,7 @@
     <RemoteReBuildCommandLine>make clean; make</RemoteReBuildCommandLine>
     <RemoteCleanCommandLine>make clean</RemoteCleanCommandLine>
     <ProjectPublicIncludePath>/usr/local/include;/usr/include;/usr/include/i386-linux-gnu</ProjectPublicIncludePath>
+    <RemoteDeployDir>$(RemoteRootDir)/$(ProjectName)</RemoteDeployDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <NMakeIncludeSearchPath>/usr/local/include;/usr/include;/usr/include/i386-linux-gnu</NMakeIncludeSearchPath>
@@ -103,13 +104,12 @@
     <RemoteReBuildCommandLine>make clean; make</RemoteReBuildCommandLine>
     <RemoteCleanCommandLine>make clean</RemoteCleanCommandLine>
     <ProjectPublicIncludePath>/usr/local/include;/usr/include;/usr/include/i386-linux-gnu</ProjectPublicIncludePath>
+    <RemoteDeployDir>$(RemoteRootDir)/$(ProjectName)</RemoteDeployDir>
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="reg_desc.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\sample\Makefile" />
+    <ClCompile Include="Makefile" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="driver.h" />
