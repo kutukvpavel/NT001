@@ -74,7 +74,9 @@ static ssize_t device_read(struct file* filp, /* see include/linux/fs.h   */
     size_t length,     /* length of the buffer     */
     loff_t* offset)
 {
-
+    if (length <= 0) return 0;
+    if ((*offset + length) > sizeof(YENET_HOST_IF_REGS))
+    if (copy_to_user(buffer, Ptr + *offset, length) > 0) return -EFAULT;
 
     return 0;
 }

@@ -5,7 +5,7 @@
 *	Exposes IOCTLs (currently only: RESET/STATUS)
 * 
 *	Character device.
-*	READ: reads the whole register file (RAW, string manipulation left to be done in the userspace counterpart)
+*	READ: reads from the register file (RAW, string manipulation left to be done in the userspace counterpart)
 *	WRITE: NOT SUPPORTED
 * 
 ****/

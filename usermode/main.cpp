@@ -2,6 +2,9 @@
 #include "driver.h"
 
 #include <fcntl.h>
+#include <unistd.h>
+
+int dump(int fd);
 
 int main(int argc, char** argv)
 {
@@ -9,7 +12,8 @@ int main(int argc, char** argv)
 	{
 		printf("Usage:\n"
 		"r[eset] - Reset the card;\n"
-		"s[tatus] - Query status register\n");
+		"s[tatus] - Query status register\n"
+		"d[ump] - Dump the whole register file\n");
 		return EXIT_CODE_NO_ARGS;
 	}
 	int fd = open("/dev/nt001", O_RDWR);
@@ -27,8 +31,21 @@ int main(int argc, char** argv)
 		printf("STATUS = 0x%4X", resp);
 		break;
 	}
+	case 'd':
+		return dump(fd);
 	default:
 		return EXIT_CODE_INVALID_ARGS;
+	}
+	return EXIT_CODE_OK;
+}
+
+int dump(int fd)
+{
+	uint16_t buf[REGISTER_FILE_LEN];
+	if (read(fd, buf, REGISTER_FILE_LEN) < 0) return EXIT_CODE_READ_FAILED;
+	for (int i = 0; i < REGISTER_FILE_LEN; i++)
+	{
+		printf("%s = %4X", register_descriptions[i], buf[i]);
 	}
 	return EXIT_CODE_OK;
 }

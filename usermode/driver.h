@@ -13,3 +13,7 @@ enum my_ioctls
 
 #define IOCTL_RESET _IO(MY_MAGIC_NUMBER, MY_IOCTL_RESET)
 #define IOCTL_GET_STATUS _IOR(MY_MAGIC_NUMBER, MY_IOCTL_GET_STATUS, uint16_t)
+
+#define REGISTER_FILE_LEN 16 //words
+
+extern const char* register_descriptions[REGISTER_FILE_LEN];

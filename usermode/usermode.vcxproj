@@ -106,6 +106,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="reg_desc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\sample\Makefile" />
