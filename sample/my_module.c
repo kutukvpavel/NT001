@@ -3,6 +3,7 @@
 #include <linux/fs.h>
 #include <linux/io.h>
 #include <linux/ioport.h>
+#include <asm/uaccess.h>
 
 MODULE_DESCRIPTION("My example module");
 MODULE_AUTHOR("MDC");
@@ -14,6 +15,7 @@ static int device_open(struct inode*, struct file*);
 static int device_release(struct inode*, struct file*);
 static ssize_t device_read(struct file*, char*, size_t, loff_t*);
 static ssize_t device_write(struct file*, const char*, size_t, loff_t*);
+static long device_ioctl(struct file*, unsigned int, unsigned long);
 
 module_init(my_init);
 module_exit(my_exit);
@@ -23,11 +25,12 @@ static struct file_operations Fops = {
   .read = device_read,
   .write = device_write,
   .open = device_open,
-  .release = device_release
+  .release = device_release,
+  .unlocked_ioctl = device_ioctl
 };
 
 static int Major;
-static void* Vptr;
+static YENET_HOST_IF_REGS* Ptr;
 
 static int my_init(void)
 {
@@ -54,14 +57,14 @@ static void my_exit(void)
 static int device_open(struct inode* node, struct file* file_ptr)
 {
     if (!request_mem_region(ISA_CARD_ADDR, ISA_SEGMENT_LEN, DEVICE_NAME)) return -EADDRINUSE;
-    if (!(Vptr = ioremap_nocache(ISA_CARD_ADDR, ISA_SEGMENT_LEN))) return -EADDRNOTAVAIL;
-
+    if (!(Ptr = (YENET_HOST_IF_REGS*)ioremap_nocache(ISA_CARD_ADDR, ISA_SEGMENT_LEN))) return -EADDRNOTAVAIL;
+    
     return 0;
 }
 
 static int device_release(struct inode* node, struct file* file_ptr)
 {
-    iounmap(Vptr);
+    iounmap(Ptr);
     release_mem_region(ISA_CARD_ADDR, ISA_SEGMENT_LEN);
     return 0;
 }
@@ -80,4 +83,24 @@ static ssize_t device_write(struct file* filp, const char* buf, size_t len, loff
 {
     printk(KERN_ALERT "Sorry, this operation isn't supported.\n");
     return -EINVAL;
+}
+
+static long device_ioctl(struct file* file_ptr, unsigned int cmd, unsigned long arg)
+{
+    switch (cmd)
+    {
+    case IOCTL_RESET:
+        ynb_set_cmd(Ptr, YN_CMD_RST_CER);
+        break;
+    case IOCTL_GET_STATUS:
+    {
+        uint16_t s = ynb_get_sts(Ptr);
+        if (copy_to_user((uint16_t*)arg, &s, sizeof(s))) return -EACCES;
+        break;
+    }
+    default:
+        return -EINVAL;
+    }
+
+    return 0;
 }
