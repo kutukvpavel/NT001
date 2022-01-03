@@ -93,10 +93,9 @@
     <RemoteReBuildCommandLine>make clean; make</RemoteReBuildCommandLine>
     <RemoteCleanCommandLine>make clean</RemoteCleanCommandLine>
     <ProjectPublicIncludePath>/usr/src/linux-headers-3.16.0-9-rtai-686-pae/arch/x86/include/generated;/usr/src/linux-headers-3.16.0-9-rtai-686-pae/arch/x86/include;/usr/src/linux-headers-3.16.0-9-rtai-686-pae/include/generated;/usr/src/linux-headers-3.16.0-9-rtai-686-pae/include;/usr/src/linux-headers-3.16.0-9-common-rtai/arch/x86/include/uapi;/usr/src/linux-headers-3.16.0-9-common-rtai/arch/x86/include;/usr/src/linux-headers-3.16.0-9-common-rtai/include;/usr/include;/usr/local/include</ProjectPublicIncludePath>
-    <RemoteCopySourceMethod>rsync</RemoteCopySourceMethod>
+    <RemoteCopySourceMethod>sftp</RemoteCopySourceMethod>
     <RemoteCCompileToolExe>/usr/bin/gcc</RemoteCCompileToolExe>
     <RemoteCppCompileToolExe>/usr/bin/gcc</RemoteCppCompileToolExe>
-    <RemoteDeployDir>$(RemoteRootDir)/$(ProjectName)</RemoteDeployDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <NMakeIncludeSearchPath>/usr/src/linux-headers-3.16.0-9-rtai-686-pae/arch/x86/include/generated;/usr/src/linux-headers-3.16.0-9-rtai-686-pae/arch/x86/include;/usr/src/linux-headers-3.16.0-9-rtai-686-pae/include/generated;/usr/src/linux-headers-3.16.0-9-rtai-686-pae/include;/usr/src/linux-headers-3.16.0-9-common-rtai/arch/x86/include/uapi;/usr/src/linux-headers-3.16.0-9-common-rtai/arch/x86/include;/usr/src/linux-headers-3.16.0-9-common-rtai/include;/usr/include;/usr/local/include</NMakeIncludeSearchPath>
@@ -105,10 +104,9 @@
     <RemoteReBuildCommandLine>make clean; make</RemoteReBuildCommandLine>
     <RemoteCleanCommandLine>make clean</RemoteCleanCommandLine>
     <ProjectPublicIncludePath>/usr/src/linux-headers-3.16.0-9-rtai-686-pae/arch/x86/include/generated;/usr/src/linux-headers-3.16.0-9-rtai-686-pae/arch/x86/include;/usr/src/linux-headers-3.16.0-9-rtai-686-pae/include/generated;/usr/src/linux-headers-3.16.0-9-rtai-686-pae/include;/usr/src/linux-headers-3.16.0-9-common-rtai/arch/x86/include/uapi;/usr/src/linux-headers-3.16.0-9-common-rtai/arch/x86/include;/usr/src/linux-headers-3.16.0-9-common-rtai/include;/usr/include;/usr/local/include</ProjectPublicIncludePath>
-    <RemoteCopySourceMethod>rsync</RemoteCopySourceMethod>
+    <RemoteCopySourceMethod>sftp</RemoteCopySourceMethod>
     <RemoteCCompileToolExe>/usr/bin/gcc</RemoteCCompileToolExe>
     <RemoteCppCompileToolExe>/usr/bin/gcc</RemoteCppCompileToolExe>
-    <RemoteDeployDir>$(RemoteRootDir)/$(ProjectName)</RemoteDeployDir>
   </PropertyGroup>
   <ItemGroup>
     <None Include="Kbuild" />

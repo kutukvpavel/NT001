@@ -10,4 +10,4 @@ tidy:
 	$(RM) -f .??*
 
 clean:
-	make -C $(KDIR) M=`pwd` clean
+	echo "not impl"

@@ -15,8 +15,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/ioctl.h>
+#include <linux/types.h>
 
-#define DEVICE_NAME "NT001"
+#define MY_DEVICE_NAME "NT001"
+#define MY_DEV_FILE_NAME MY_DEVICE_NAME "_0"
 #define ISA_CARD_ADDR 0xDA000
 #define ISA_SEGMENT_LEN 0x1000
 #define MY_MAGIC_NUMBER 0x8F
