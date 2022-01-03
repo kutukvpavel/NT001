@@ -1,5 +1,5 @@
 /****
-*	Experimental kenrel module for JASP-NT001 ISA-Mechatrolink card
+*	Experimental kenrel module for JASP-NT001 ISA <-> Mechatrolink card
 *	Based on Yaskawa MELDEMO sources for DOS
 *	Remaps 16 16-bit registers of the card into virtual memory to be accessed
 *	Exposes IOCTLs (currently only: RESET/STATUS)
@@ -7,6 +7,16 @@
 *	Character device.
 *	READ: reads from the register file (RAW, string manipulation left to be done in the userspace counterpart)
 *	WRITE: NOT SUPPORTED
+* 
+* 
+*	STATUS:
+*	Reset doesn't trigger any change in register values 
+*	(beside constant random changes of the higher 8 ones - ???).
+*	Either JL-012 register map is incompatible with JL-080's one,
+*	or we're missing something.
+* 
+*	TODO:
+*	Verify SW1 address selector layout. Build an ISA sniffer?..
 * 
 ****/
 
@@ -100,3 +110,14 @@ typedef struct _YENET_HOST_IF_REGS {
 #define ynb_set_pars(pJL, data)   writew(data, &(pJL->pars))
 #define ynb_get_mctr(pJL)         readw(&(pJL->mctr))
 #define ynb_set_lbss(pJL, data)   writew(data, &(pJL->lbss))
+
+#define my_print(str) pr_debug(MY_DEVICE_NAME ": %s\n", str)
+
+static int my_init(void);
+static void my_exit(void);
+static int device_open(struct inode*, struct file*);
+static int device_release(struct inode*, struct file*);
+static ssize_t device_read(struct file*, char*, size_t, loff_t*);
+static ssize_t device_write(struct file*, const char*, size_t, loff_t*);
+static long device_ioctl(struct file*, unsigned int, unsigned long);
+static char* get_devnode(struct device*, umode_t*);

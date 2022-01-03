@@ -13,17 +13,6 @@ MODULE_DESCRIPTION("My example module");
 MODULE_AUTHOR("MDC2012");
 MODULE_LICENSE("GPL");
 
-#define my_print(str) pr_debug(MY_DEVICE_NAME ": %s\n", str)
-
-static int my_init(void);
-static void my_exit(void);
-static int device_open(struct inode*, struct file*);
-static int device_release(struct inode*, struct file*);
-static ssize_t device_read(struct file*, char*, size_t, loff_t*);
-static ssize_t device_write(struct file*, const char*, size_t, loff_t*);
-static long device_ioctl(struct file*, unsigned int, unsigned long);
-static char* get_devnode(struct device*, umode_t*);
-
 module_init(my_init);
 module_exit(my_exit);
 

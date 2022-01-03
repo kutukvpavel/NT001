@@ -1,3 +1,12 @@
+/*****
+*	Userspace counterpart for experimental kernel module for Yaskawa JASP-NT001
+*	ISA <-> Mechatrolink interface card.
+* 
+*	Usage: try to run without arguments.
+*	
+* 
+***/
+
 #pragma once
 
 #include <stdio.h>
