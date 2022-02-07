@@ -8,4 +8,4 @@ therefore JL-012 probably had a different register map comapred to older JLs (or
 
 Unfortunately, no there's no publicly available documentation on JL-012 and NT001 what-so-ever.
 
-Built with VSCode remote development, KBuild and GNU Make for Debian 10.
+Built with MS Visual Studio 2019 SSH remote development, KBuild and GNU Make for Debian 10.
